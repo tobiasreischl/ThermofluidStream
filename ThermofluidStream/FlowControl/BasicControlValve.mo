@@ -24,8 +24,7 @@ model BasicControlValve "Basic valve model with optional flow characteristics fo
   parameter SI.MassFlowRate m_flow_ref_set =  0 "Reference mass flow rate"
     annotation(Dialog(group = "Valve parameters",enable = (flowCoefficient ==FlowCoeffType.m_flow_set)));
 
-  Real phi(min = 0, max = 1) "Normalized pressure";
-
+  Real phi "Normalized pressure";
 
 protected
   final parameter SI.VolumeFlowRate V_flow_ref=
@@ -47,17 +46,13 @@ initial equation
     assert(m_flow_ref_set > 0, "Invalid coefficient for m_flow_ref_set. Default value 0 (or negative value) shall not be used", level=AssertionLevel.error);
   end if;
 
-  //Calculate reference mass flow rate from reference volume flow rate
   m_flow_ref = V_flow_ref*rho_ref;
 
 equation
 
   k_u = valveCharacteristics(u, k_min);
 
-  // Adding color to the icon
-  // Normalize pressure ratio into [0,1]
   phi = max(0, min(1, abs(dp) / (abs(dp_ref) + p_min)));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true), graphics={
         Line(
@@ -111,7 +106,7 @@ equation
           visible=displayParameters,
           extent={{-100,96},{100,66}},
           textColor={0,0,0},
-          textString=DynamicSelect("", "dp = " + String(dp/1e5, significantDigits=2) + " bar"))}),
+          textString=DynamicSelect("", "dp = " + String(abs(dp/1e5), significantDigits=2) + " bar"))}),
                            Diagram(coordinateSystem(preserveAspectRatio=true)),
     Documentation(info="<html>
 <p>This model serves for most incompressible applications where basic control valves are needed. </p>

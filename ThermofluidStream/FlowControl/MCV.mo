@@ -36,7 +36,7 @@ model MCV "Flow rate control valve"
     else "error";
   //-----------------------------------------------------------------
 
-   Real phi(min = 0, max = 1) "Normalized pressure";
+  Real phi "Normalized pressure";
 
   Modelica.Blocks.Interfaces.RealInput setpoint_var if setpointFromInput "Flow rate input connector"
     annotation (Placement(transformation(extent={{-20,-20},{20,20}},rotation=270,origin={0,80}),
@@ -96,8 +96,6 @@ equation
   h_out = h_in;
   Xi_out = Xi_in;
 
-  // Adding color to the icon
-  // Normalize pressure ratio into [0,1]
   phi = max(0, min(1, abs(dp) / (abs(p_in) + p_min)));
 
   annotation (

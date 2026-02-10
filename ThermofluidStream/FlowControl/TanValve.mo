@@ -17,7 +17,7 @@ model TanValve "Valve with tan-shaped flow resistance"
   parameter SI.Pressure p_ref = 1e5 "Reference pressure";
   parameter Real relativeLeakiness(unit="1") = 1e-3 "Imperfection of valve";
 
-  Real phi(min = 0, max = 1) "Normalized pressure";
+  Real phi "Normalized pressure";
 
 protected
   Real k(unit="(Pa.s)/kg");
@@ -36,10 +36,7 @@ equation
   h_out = h_in;
   Xi_out = Xi_in;
 
-  // Adding color to the icon
-  // Normalize pressure ratio into [0,1]
   phi = max(0, min(1, abs(dp) / (abs(p_in) + p_min)));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true), graphics={
         Line(

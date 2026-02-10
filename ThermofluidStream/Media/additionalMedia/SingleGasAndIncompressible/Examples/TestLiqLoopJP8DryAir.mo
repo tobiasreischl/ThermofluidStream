@@ -12,8 +12,7 @@ model TestLiqLoopJP8DryAir
       annotation(choicesAllMatching=true);
 
     replaceable package TertiaryMedium =
-     ThermofluidStream.Media.additionalMedia.SingleGasAndIncompressible.JP8DryAir
-                                                                                        constrainedby
+     ThermofluidStream.Media.additionalMedia.SingleGasAndIncompressible.JP8DryAir       constrainedby
     ThermofluidStream.Media.myMedia.Interfaces.PartialMedium
       annotation(choicesAllMatching=true);
 

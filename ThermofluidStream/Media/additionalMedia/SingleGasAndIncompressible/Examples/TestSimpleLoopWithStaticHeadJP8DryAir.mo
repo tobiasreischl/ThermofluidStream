@@ -12,11 +12,10 @@ model TestSimpleLoopWithStaticHeadJP8DryAir
        annotation(choicesAllMatching=true);
 
      replaceable package TertiaryMedium =
-
-      ThermofluidStream.Media.additionalMedia.SingleGasAndIncompressible.JP8DryAir
-                                                                                        constrainedby
+      ThermofluidStream.Media.additionalMedia.SingleGasAndIncompressible.JP8DryAir      constrainedby
     ThermofluidStream.Media.myMedia.Interfaces.PartialMedium
-       annotation(choicesAllMatching=true);
+       annotation(
+                  choicesAllMatching=true);
    //     TertiaryMedium.BaseProperties terMedium;
 
      ThermofluidStream.Processes.FlowResistance flowResistance1(

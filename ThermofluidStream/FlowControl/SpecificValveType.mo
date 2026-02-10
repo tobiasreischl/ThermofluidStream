@@ -24,7 +24,7 @@ model SpecificValveType "Specific technical valve types"
   parameter SI.Diameter d_valve = 0 "Flow diameter"
     annotation (Dialog(group="Valve parameters", enable=(flowCoefficient== FlowCoeffType.flowDiameter)));
 
-  Real phi(min = 0, max = 1) "Normalized pressure";
+  Real phi "Normalized pressure";
 
 protected
   final parameter SI.Area A_valve=0.25*Modelica.Constants.pi*d_valve^2 "Cross-sectional area";
@@ -76,8 +76,6 @@ equation
 
   k_u = k_min + (1 - k_min)*k_u_zeta;
 
-  // Adding color to the icon
-  // Normalize pressure ratio into [0,1]
   phi = max(0, min(1, abs(dp) / (abs(dp_ref) + p_min)));
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true), graphics={

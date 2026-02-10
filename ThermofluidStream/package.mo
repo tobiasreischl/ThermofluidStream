@@ -9,8 +9,8 @@ package ThermofluidStream "Library for the modeling of thermofluid streams"
     versionDate = "2024-11-18",
     dateModified = "2024-11-18 16:54:00Z",
     uses(
-      Modelica(version="4.0.0"),
-      Complex(version="4.0.0")),
+      Modelica(version="4.1.0"),
+      Complex(version="4.1.0")),
     conversion(
       noneFromVersion="1.1.0",
       from(

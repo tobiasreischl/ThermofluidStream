@@ -104,11 +104,13 @@ Temperature T (= " + String(T) + " K) is not in the allowed range
 
       redeclare function extends setSmoothState "Return thermodynamic state so that it smoothly approximates: if x > 0 then state_a else state_b"
       algorithm
-    state := ThermodynamicState(p=myMedia.Common.smoothStep(
+    state := ThermodynamicState(
+            p=myMedia.Common.smoothStep(
             x,
             state_a.p,
             state_b.p,
-            x_small), T=myMedia.Common.smoothStep(
+            x_small),
+                      T=myMedia.Common.smoothStep(
             x,
             state_a.T,
             state_b.T,

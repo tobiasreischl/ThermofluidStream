@@ -13,7 +13,7 @@ Medium package used in the Test.
 
   inner ThermofluidStream.DropOfCommons dropOfCommons(assertionLevel = AssertionLevel.warning,
     displayInstanceNames=true,
-    displayParameters=true)
+    displayParameters=false)
     annotation (Placement(transformation(extent={{-170,94},{-150,114}})));
   ThermofluidStream.Boundaries.Source source(
     redeclare package Medium = medium,

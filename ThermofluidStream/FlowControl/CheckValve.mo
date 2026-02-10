@@ -1,25 +1,24 @@
 within ThermofluidStream.FlowControl;
 model CheckValve "Valve to enforce non negative mass flow rates"
 
-  extends Interfaces.SISOFlow(final clip_p_out=false);
+  extends Interfaces.SISOFlow(
+    displayParameters=true,
+    displayInstanceName=true, final clip_p_out=false);
 
   parameter SI.MassFlowRate m_flow_ref = dropOfCommons.m_flow_reg "Reference mass flow rate for regularization"
     annotation(Dialog(tab="Advanced"));
-  parameter SI.Pressure p_ref = 1e5 "Reference pressure for regularization"
+  parameter SI.Pressure p_ref=100000
+                                    "Reference pressure for regularization"
     annotation(Dialog(tab="Advanced"));
 
-  Real phi(min = 0, max = 1) "Normalized pressure";
+  Real phi "Normalized pressure";
 
 equation
   dp = if noEvent(m_flow < 0) then p_ref*((m_flow/m_flow_ref)^2) else 0;
   h_out = h_in;
   Xi_out = Xi_in;
 
-
-  // Adding color to the icon
-  // Normalize pressure ratio into [0,1]
   phi = max(0, min(1, abs(dp) / (abs(p_in) + p_min)));
-
 
   annotation (Icon(coordinateSystem(preserveAspectRatio=true), graphics={
         Text(visible=displayInstanceName,
