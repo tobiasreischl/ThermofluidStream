@@ -44,25 +44,24 @@ some medium properties and the geometry of the pipe.
         enable=(shape == ThermofluidStream.Processes.Internal.ShapeOfResistance.rectangle)));
   parameter SI.Length b(min=0) = 0 "Rectangle height" annotation (Dialog(group="Geometry",
         enable=(shape == ThermofluidStream.Processes.Internal.ShapeOfResistance.rectangle)));
-  parameter SI.Area areaCrossInput(min=0) = 0 "Cross-sectional area"
-    annotation (Dialog(group="Geometry", enable=(shape == ThermofluidStream.Processes.Internal.ShapeOfResistance.other)));
+  parameter SI.Area areaCrossInput(min=0) = 0 "Cross-sectional area" annotation (Dialog(group="Geometry", enable=(shape == ThermofluidStream.Processes.Internal.ShapeOfResistance.other)));
   parameter SI.Length perimeterInput(min=0) = 0 "Wetted perimeter" annotation (
       Dialog(group="Geometry", enable=(shape == ThermofluidStream.Processes.Internal.ShapeOfResistance.other)));
-  parameter Boolean computeL=true
-    "= true, if inertance L is computed from the geometry" annotation (
+  parameter Boolean computeL=true "= true, if inertance L is computed from the geometry" annotation (
     Dialog(tab="Advanced", group="Inertance"),
     Evaluate=true,
     HideResult=true,
     choices(checkBox=true));
-  parameter Utilities.Units.Inertance L_value=dropOfCommons.L "Inertance"
-    annotation (Dialog(
+  parameter Utilities.Units.Inertance L_value=dropOfCommons.L "Inertance" annotation (Dialog(
       tab="Advanced",
       group="Inertance",
       enable=not computeL));
-  parameter SI.Density rho_min=dropOfCommons.rho_min "Minimal inlet density"
-    annotation (Dialog(tab="Advanced"));
-  parameter SI.Pressure p_reference = 6e5
-    "Reference value for the intensity of coloring";
+  parameter SI.Density rho_min=dropOfCommons.rho_min "Minimal inlet density" annotation (Dialog(tab="Advanced"));
+  parameter SI.Pressure p_reference = 6e5 "Reference value for the intensity of coloring";
+
+  parameter Boolean showPressureDrop = true "= true, if pressure drop is displayed" annotation(Dialog(tab="Layout", group="Display variables"), Evaluate=true, HideResult=true, choices(checkBox=true));
+  parameter ThermofluidStream.Processes.Internal.Types.PressureUnit pressureDropUnit = ThermofluidStream.Processes.Internal.Types.PressureUnit.Pa "Unit for displayed pressure drop" annotation(Dialog(tab="Layout", group="Display variables", enable=showPressureDrop), Evaluate=true, HideResult=true);
+  parameter Integer pressureDropSignificantDigits(min=0) = 0 "Significant digits for displayed pressure drop" annotation(Dialog(tab="Layout", group="Display variables", enable=showPressureDrop), Evaluate=true, HideResult=true);
 
   Real phi(min=0, max=1) "Normalized pressure for coloring the flow resistance";
 
@@ -73,8 +72,7 @@ some medium properties and the geometry of the pipe.
   final parameter SI.Area areaCross=if shape == ShapeOfResistance.circular
        then pi*r*r elseif shape == ShapeOfResistance.rectangle then a*b else
       areaCrossInput "Cross-sectional area";
-  final parameter SI.Area areaHydraulic=pi*D_h*D_h*1/4
-    "Hydraulic cross-sectional area";
+  final parameter SI.Area areaHydraulic=pi*D_h*D_h*1/4 "Hydraulic cross-sectional area";
 
 protected
   SI.Density rho_in=max(rho_min, Medium.density(inlet.state)) "Inlet density";
@@ -134,8 +132,22 @@ equation
           thickness=0.5,
           smooth=Smooth.Bezier,
           origin={0,25},
-          rotation=180)}),
-    Diagram(coordinateSystem(preserveAspectRatio=true)),
+          rotation=180),
+        Text(
+          visible= dropOfCommons.displayParameters and showPressureDrop and pressureDropUnit == ThermofluidStream.Processes.Internal.Types.PressureUnit.Pa,
+          extent={{-150,-70},{150,-100}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", "dp = " + String(dp, significantDigits=pressureDropSignificantDigits)+ " Pa")),
+        Text(
+          visible= dropOfCommons.displayParameters and showPressureDrop and pressureDropUnit == ThermofluidStream.Processes.Internal.Types.PressureUnit.kPa,
+          extent={{-150,-70},{150,-100}},
+          textColor={0,0,0},
+            textString=DynamicSelect("", "dp = " + String(dp/1e3, significantDigits=pressureDropSignificantDigits)+ " kPa")),
+        Text(
+          visible= dropOfCommons.displayParameters and showPressureDrop and pressureDropUnit == ThermofluidStream.Processes.Internal.Types.PressureUnit.bar,
+          extent={{-150,-70},{150,-100}},
+          textColor={0,0,0},
+          textString=DynamicSelect("", "dp = " + String(dp/1e5, significantDigits=pressureDropSignificantDigits)+ " bar"))}),  Diagram(coordinateSystem(preserveAspectRatio=true)),
     Documentation(info="<html>
 <p>
 Implementation of a flow resistance pipe with different selectable
