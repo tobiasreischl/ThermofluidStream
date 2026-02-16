@@ -14,7 +14,7 @@ partial model PartialNTU "Partial heat exchanger model using the epsilon-NTU met
     annotation (Dialog(tab="Advanced"));
   parameter Modelica.Units.SI.MassFlowRate m_flow_reg=dropOfCommons.m_flow_reg "Nominal mass flow rate for regularization"
     annotation (Dialog(tab="Advanced", group="Regularization parameters"));
-  parameter Modelica.Units.SI.Time TC=0.01 "Heat exchanger time constant (increase as recommended in the documentation)";
+  parameter Modelica.Units.SI.Time TC=20 "Heat exchanger time constant (see documentation for better estimation)";
 
   // ------ Parameter Display Configuration  ------------------------
   parameter Boolean displayArea = true "= true, if the heat transfer area A is displayed"
