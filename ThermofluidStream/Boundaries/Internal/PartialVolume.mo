@@ -24,7 +24,7 @@ inlets and outlets the volume is connected to.
 
   parameter Boolean initialize_pressure = true "=true, if pressure is initialized"
     annotation(Dialog(tab= "Initialization",group="Pressure"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Pressure p_start = Medium.p_default "Initial pressure set value"
+  parameter SI.AbsolutePressure p_start = Medium.p_default "Initial pressure set value"
     annotation(Dialog(tab= "Initialization",group="Pressure", enable=initialize_pressure));
   parameter Boolean initialize_energy = true "= true, if internal energy is initialized"
     annotation(Dialog(tab= "Initialization",group="Temperature"),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -32,7 +32,7 @@ inlets and outlets the volume is connected to.
     annotation(Dialog(tab= "Initialization",group="Temperature", enable=initialize_energy and (not use_hstart)));
   parameter Boolean initialize_Xi = true "=true, if mass fractions are iinitialized"
     annotation(Dialog(tab= "Initialization",group="Mass fractions"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Medium.MassFraction Xi_0[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Initial mass fractions set values"
+  parameter SI.MassFraction Xi_0[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Initial mass fractions set values"
     annotation(Dialog(tab= "Initialization",group="Mass fractions", enable=initialize_Xi));
   parameter Boolean use_hstart = false "=true, if internal energy is initialized with specific enthalpy"
     annotation(Dialog(tab= "Initialization",group="Specific enthalpy", enable=initialize_energy),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -76,16 +76,16 @@ protected
   SI.Pressure r_damping = d*der(M) "Damping of inertial pressure";
 
   Medium.ThermodynamicState state_in "Inlet state";
-  SI.Pressure p_in = Medium.pressure(state_in) "Inlet pressure";
+  SI.AbsolutePressure p_in = Medium.pressure(state_in) "Inlet pressure";
   // fix potential instabilities by setting the outgoing enthalpy and mass fraction to the medium state
   SI.SpecificEnthalpy h_in = if noEvent(m_flow_in >= 0) then Medium.specificEnthalpy(state_in) else medium.h "Inlet specific enthalpy";
-  Medium.MassFraction Xi_in[Medium.nXi] = if noEvent(m_flow_in >= 0) then Medium.massFraction(state_in) else medium.Xi "Inlet mass fractions";
+  SI.MassFraction Xi_in[Medium.nXi] = if noEvent(m_flow_in >= 0) then Medium.massFraction(state_in) else medium.Xi "Inlet mass fractions";
 
   Medium.ThermodynamicState state_out "Oulet state";
   // fix potential instabilities by setting the incoming enthalpy and mass fraction inlet ones,
   // effectiveley removing the mass-flow related parts of the differential equations for U and MXi
   SI.SpecificEnthalpy h_out = if noEvent(-m_flow_out >= 0) then Medium.specificEnthalpy(state_out) else medium.h "Outlet specific enthalpy";
-  Medium.MassFraction Xi_out[Medium.nXi] = if noEvent(-m_flow_out >= 0) then Medium.massFraction(state_out) else medium.Xi "Outlet mass fractions";
+  SI.MassFraction Xi_out[Medium.nXi] = if noEvent(-m_flow_out >= 0) then Medium.massFraction(state_out) else medium.Xi "Outlet mass fractions";
 
   SI.Pressure r_in, r_out "Inlet/Outlet inertial pressure";
   SI.MassFlowRate m_flow_in, m_flow_out "Inlet/Outlet mass flow rate";

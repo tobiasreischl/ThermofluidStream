@@ -19,9 +19,9 @@ model Piston "Piston model with steam on both sides"
 
   parameter Boolean initializeX = true "Initialize piston position"
     annotation(Dialog(tab="Initials"));
-  parameter SI.Pressure p0_left = 1e5 "Left side initial temperature"
+  parameter SI.AbsolutePressure p0_left = 1e5 "Left side initial temperature"
     annotation(Dialog(tab="Initials"));
-  parameter SI.Pressure p0_right = 1e5 "Right side initial temperature"
+  parameter SI.AbsolutePressure p0_right = 1e5 "Right side initial temperature"
     annotation(Dialog(tab="Initials"));
   parameter SI.Mass m0_left = 2 "Left side initial mass"
     annotation(Dialog(tab="Initials"));

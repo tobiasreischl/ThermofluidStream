@@ -23,7 +23,7 @@ the fores and rears the volume is connected to.
 
   parameter Boolean initialize_pressure = true "=true, if pressure is initialized"
     annotation(Dialog(tab= "Initialization",group="Pressure"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Pressure p_start = Medium.p_default "Initial pressure set value"
+  parameter SI.AbsolutePressure p_start = Medium.p_default "Initial pressure set value"
     annotation(Dialog(tab= "Initialization",group="Pressure", enable=initialize_pressure));
   parameter Boolean initialize_energy = true "= true, if internal energy is initialized"
     annotation(Dialog(tab= "Initialization",group="Temperature"),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -31,7 +31,7 @@ the fores and rears the volume is connected to.
     annotation(Dialog(tab= "Initialization",group="Temperature", enable=initialize_energy and (not use_hstart)));
   parameter Boolean initialize_Xi = true "=true, if mass fractions are iinitialized"
     annotation(Dialog(tab= "Initialization",group="Mass fractions"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Medium.MassFraction Xi_0[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Initial mass fractions set values"
+  parameter SI.MassFraction Xi_0[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Initial mass fractions set values"
     annotation(Dialog(tab= "Initialization",group="Mass fractions", enable=initialize_Xi));
   parameter Boolean use_hstart = false "=true, if internal energy is initialized with specific enthalpy"
     annotation(Dialog(tab= "Initialization",group="Specific enthalpy", enable=initialize_energy),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -77,8 +77,8 @@ protected
   SI.Pressure r_fore[N_fore] "Fore ports inertial pressure";
   SI.SpecificEnthalpy h_rear[N_rear] "Reat ports specific enthalpy";
   SI.SpecificEnthalpy h_fore[N_fore] "Fore ports specific enthalpy";
-  Medium.MassFraction Xi_rear[Medium.nXi, N_rear] "Rear ports mass fractions";
-  Medium.MassFraction Xi_fore[Medium.nXi, N_fore] "Fore ports mass fractions";
+  SI.MassFraction Xi_rear[Medium.nXi, N_rear] "Rear ports mass fractions";
+  SI.MassFraction Xi_fore[Medium.nXi, N_fore] "Fore ports mass fractions";
 
   Real d(unit="1/(m.s)") = k_volume_damping*sqrt(abs(2*L/(V*max(density_derp_h, 1e-10)))) "Friction factor for coupled boundaries";
   SI.DerDensityByPressure density_derp_h "Partial derivative of density by pressure at constant specific enthalpy";

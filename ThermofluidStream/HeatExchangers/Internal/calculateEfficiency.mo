@@ -22,8 +22,8 @@ protected
   SI.SpecificEnthalpy h_A_in = MediumA.specificEnthalpy(state_A_in) "Inlet A specific enthalpy";
   SI.SpecificEnthalpy h_B_in = MediumB.specificEnthalpy(state_B_in) "Inlet B specific enthalpy";
 
-  SI.Pressure p_A = MediumA.pressure(state_A_out) "Outlet A pressure";
-  SI.Pressure p_B = MediumB.pressure(state_B_out) "Outlet B pressure";
+  SI.AbsolutePressure p_A = MediumA.pressure(state_A_out) "Outlet A pressure";
+  SI.AbsolutePressure p_B = MediumB.pressure(state_B_out) "Outlet B pressure";
 
   SI.MassFraction[MediumA.nXi] Xi_A = MediumA.massFraction(state_A_out) "Outlet A mass fractions";
   SI.MassFraction[MediumB.nXi] Xi_B = MediumB.massFraction(state_B_out) "Outlet B mass fractions";

@@ -38,7 +38,7 @@ model PhaseSeparator "Base model for receiver and accumulator models"
   Real vapor_quality = max(0,min(1,x));
 
 protected
-  Medium.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated vapor quality of medium that can go below zero and above one";
+  SI.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated vapor quality of medium that can go below zero and above one";
   SI.SpecificEnthalpy h_pipe;
 
   SI.Density d_liq = Medium.bubbleDensity(Medium.setSat_p(medium.p)) "Bubble density at saturation";

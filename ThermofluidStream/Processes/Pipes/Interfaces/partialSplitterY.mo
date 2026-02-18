@@ -23,17 +23,17 @@ partial model partialSplitterY "Duplicate of SplitterM considering dynamic effec
   //delta = out - in;
   //protected
   // Inlet state quantities
-  SI.Pressure p_in = Medium.pressure(inlet.state) "Inlet pressure";
+  SI.AbsolutePressure p_in = Medium.pressure(inlet.state) "Inlet pressure";
   SI.Velocity c_in "Inlet velocity";
   SI.SpecificEnthalpy h_in = Medium.specificEnthalpy(inlet.state) "Inlet enthalpy";
-  Medium.MassFraction Xi_in[Medium.nXi] = Medium.massFraction(inlet.state) "Inlet mass fractions";
+  SI.MassFraction Xi_in[Medium.nXi] = Medium.massFraction(inlet.state) "Inlet mass fractions";
   // Outlet state quantities
-  SI.Pressure p_straight "Outlet A pressure";
+  SI.AbsolutePressure p_straight "Outlet A pressure";
   SI.Velocity c_straight "Outlet A velocity";
-  SI.Pressure p_branching "Outlet B pressure";
+  SI.AbsolutePressure p_branching "Outlet B pressure";
   SI.Velocity c_branching "Outlet B velocity";
   SI.SpecificEnthalpy h_out "Outlet enthalpy";
-  Medium.MassFraction Xi_out[Medium.nXi] "Outlet mass fractions";
+  SI.MassFraction Xi_out[Medium.nXi] "Outlet mass fractions";
   // Pressure loss
   SI.Pressure dp_straight "Static pressure difference in straight outlet";
   SI.Pressure dp_branching "Static pressure difference in branching outlet";

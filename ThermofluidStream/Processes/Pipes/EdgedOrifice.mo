@@ -43,8 +43,8 @@ model EdgedOrifice "Pressure drop due to sharp edged orifice using Modelica.Flui
   Modelica.Fluid.Dissipation.PressureLoss.Orifice.dp_thickEdgedOverall_IN_var In_var(eta=mu, rho=rho) "Input record variables";
   SI.ReynoldsNumber Re = d_0*abs(m_flow)/A_0/mu "Reynoldsnumber at vena contraction";
 protected
-  final parameter Modelica.Units.SI.Area A_0 = pi/4*d_0^2 "Cross-sectional area of vena contraction";
-  final parameter Modelica.Units.SI.Area A_1 = pi/4*d_1^2 "Cross-sectional area of pipe";
+  final parameter SI.Area A_0 = pi/4*d_0^2 "Cross-sectional area of vena contraction";
+  final parameter SI.Area A_1 = pi/4*d_1^2 "Cross-sectional area of pipe";
 
   SI.Density rho_in = max(rho_min, Medium.density(inlet.state)) "Inlet density";
   SI.Density rho_out = if assumeConstantMaterialProperties then rho_in else max(rho_min, Medium.density(outlet.state)) "Outlet density";

@@ -35,8 +35,8 @@ partial model PartialConductionElement "Partial model of quasi-stationary mass a
   SI.Mass M "Medium mass";
 
 protected
-  SI.Pressure p = Undirected.Internal.regStep(m_flow, p_rear_in, p_fore_in, m_flow_reg) "Pressure";
-  Medium.MassFraction[Medium.nXi] Xi = Undirected.Internal.regStep(m_flow, Xi_rear_in, Xi_fore_in, m_flow_reg) "Mass fractions";
+  SI.AbsolutePressure p = Undirected.Internal.regStep(m_flow, p_rear_in, p_fore_in, m_flow_reg) "Pressure";
+  SI.MassFraction[Medium.nXi] Xi = Undirected.Internal.regStep(m_flow, Xi_rear_in, Xi_fore_in, m_flow_reg) "Mass fractions";
   //h_in only in rhs of ODE--> h still smooth, better results at low massflow than using regStep
   SI.SpecificEnthalpy h_in = if m_flow >= 0 then h_rear_in else h_fore_in "Inlet specific enthalpy";
 

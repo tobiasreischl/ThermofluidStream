@@ -36,7 +36,7 @@ model PhaseSeparator "Base model for receiver and accumulator models"
   Real liquid_level_pipe(unit="1") "Level of liquid line in pipe";
 
 protected
-  Medium.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated quality of medium that can go below zero and above one";
+  SI.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated quality of medium that can go below zero and above one";
 
   SI.SpecificEnthalpy h_pipe;
 

@@ -38,7 +38,7 @@ model PhaseSeparator2 "Phase separator with two outlets"
   Real liquid_level_pipe2(unit="1") "Level of liquid line in second pipe";
 
 protected
-  Medium.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated vapor quality of medium that can go below zero and above one";
+  SI.MassFraction x = (medium.h-h_bubble)/(h_dew - h_bubble) "Calculated vapor quality of medium that can go below zero and above one";
   SI.SpecificEnthalpy h_pipe1 "Specific enthalpy of medium in first pipe";
   SI.SpecificEnthalpy h_pipe2 "Specific enthalpy of medium in second pipe";
 

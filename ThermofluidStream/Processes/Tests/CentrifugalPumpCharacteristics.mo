@@ -7,7 +7,7 @@ model CentrifugalPumpCharacteristics "Test model for CentrifugalPump"
   parameter Real w_n=0.2 "Normalized speed";
   parameter SI.Temperature T=293.15
                              "Temperature";
-  parameter SI.Pressure p=100000
+  parameter SI.AbsolutePressure p=100000
                           "Pressue";
   final parameter Medium.ThermodynamicState state = Medium.setState_pT(p,T);
   final parameter SI.Density rho = Medium.density(state);

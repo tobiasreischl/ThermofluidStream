@@ -10,7 +10,7 @@ model CreateState "Create state signal as output"
 
   parameter Boolean PFromInput = false "= true, if pressure input connector is enabled"
     annotation(Dialog(group="Pressure"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Pressure p_par = Medium.p_default "Pressure set value"
+  parameter SI.AbsolutePressure p_par = Medium.p_default "Pressure set value"
     annotation(Dialog(group="Pressure", enable = not PFromInput));
   parameter Boolean TFromInput = false "= true, if temperature input connector is enabled"
     annotation(Dialog(group="Temperature", enable = not setEnthalpy),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -18,7 +18,7 @@ model CreateState "Create state signal as output"
     annotation(Dialog(group="Temperature", enable = not setEnthalpy and not TFromInput));
   parameter Boolean XiFromInput = false "= true, if mass fractions input connector is enabled"
     annotation(Dialog(group="Mass fractions"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Medium.MassFraction Xi_par[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Mass fraction set value"
+  parameter SI.MassFraction Xi_par[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Mass fraction set value"
     annotation(Dialog(group="Mass fractions", enable = not XiFromInput));
   parameter Boolean setEnthalpy = false "= true to set specific enthalpy, (= false to set temperature)"
     annotation(Dialog(group="Specific enthalpy"),Evaluate=true, HideResult=true, choices(checkBox=true));

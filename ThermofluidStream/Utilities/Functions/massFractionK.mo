@@ -6,10 +6,10 @@ function massFractionK
 
   input Medium.ThermodynamicState state;
   input Integer k;
-  output Medium.MassFraction x;
+  output SI.MassFraction x;
 
 protected
-  Medium.MassFraction Xi[Medium.nXi] = Medium.massFraction(state);
+  SI.MassFraction Xi[Medium.nXi] = Medium.massFraction(state);
 
 algorithm
   x := Xi[k];

@@ -27,7 +27,8 @@ model ThermalConvectionPipe "Very simple model of thermal convection"
   //-----------------------------------------------------------------
 
   Medium.ThermodynamicState center_state = Medium.setState_phX(p_in,h_in+dh/2,Xi_in) "State at (h_in+h_out)/2";
-  Medium.Temperature T = Medium.temperature(center_state) "Temperature at center state";
+  SI.Temperature
+ T = Medium.temperature(center_state) "Temperature at center state";
 
   Integer turb_flag "= 0 for laminar flow, = 1 for turbulent flow (Re > 2300)";
 

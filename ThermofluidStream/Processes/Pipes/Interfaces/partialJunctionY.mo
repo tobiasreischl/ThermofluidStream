@@ -33,12 +33,12 @@ partial model partialJunctionY "Duplicate of JunctionN considering dynamic effec
 
   Real w[2] = {w_straight, w_branching} "Regularized weighting factor for specific enthalpy";
 
-  SI.Pressure p_in_straight = Medium.pressure(inlet_straight.state) "(steady mass-flow) pressure straight inlet";
-  SI.Pressure p_in_branching = Medium.pressure(inlet_branching.state) "(steady mass-flow) pressure branching inlet";
+  SI.AbsolutePressure p_in_straight = Medium.pressure(inlet_straight.state) "(steady mass-flow) pressure straight inlet";
+  SI.AbsolutePressure p_in_branching = Medium.pressure(inlet_branching.state) "(steady mass-flow) pressure branching inlet";
 
-  SI.Pressure p_straight "Total pressure straight inlet";
-  SI.Pressure p_branching "Total pressure branching inlet";
-  SI.Pressure p[2] = {p_straight, p_branching} "Total pressure inlets [straight branching]";
+  SI.AbsolutePressure p_straight "Total pressure straight inlet";
+  SI.AbsolutePressure p_branching "Total pressure branching inlet";
+  SI.AbsolutePressure p[2] = {p_straight, p_branching} "Total pressure inlets [straight branching]";
 
   SI.Pressure dq_straight "Dynamic pressure difference straight inlet - outlet";
   SI.Pressure dq_branching "Dynamic pressure difference straight inlet - outlet";
@@ -52,10 +52,10 @@ partial model partialJunctionY "Duplicate of JunctionN considering dynamic effec
   SI.SpecificEnthalpy h[2] = {h_straight, h_branching} "Specific enthapy inlets [straight branching]";
   SI.SpecificEnthalpy h_mix "Outlet specific enthalpy";
 
-  Medium.MassFraction Xi[Medium.nXi, 2] "Mass factions inlets [straight branching]";
-  Medium.MassFraction Xi_mix[Medium.nXi] "Mass fractions outlet";
+  SI.MassFraction Xi[Medium.nXi, 2] "Mass factions inlets [straight branching]";
+  SI.MassFraction Xi_mix[Medium.nXi] "Mass fractions outlet";
 
-  SI.Pressure p_mix "Outlet (steady mass-flow) pressure";
+  SI.AbsolutePressure p_mix "Outlet (steady mass-flow) pressure";
   SI.Pressure r_mix "Outlet inertial pressure";
 
   SI.Velocity c_straight "Velocity straight inlet";

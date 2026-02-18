@@ -10,7 +10,7 @@ model BoundaryFore "Generic Boundary model (may act as source or sink)"
 
   parameter Boolean pressureFromInput = false "= true, if pressure input connector is enabled"
     annotation(Dialog(group="Pressure"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter SI.Pressure p0_par = Medium.p_default "Pressure set value"
+  parameter SI.AbsolutePressure p0_par = Medium.p_default "Pressure set value"
     annotation(Dialog(group="Pressure", enable = not pressureFromInput));
   parameter Boolean temperatureFromInput = false "= true, if temperature input connector is enabled"
     annotation(Dialog(group="Temperature", enable = not setEnthalpy),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -18,7 +18,7 @@ model BoundaryFore "Generic Boundary model (may act as source or sink)"
     annotation(Dialog(group="Temperature", enable = not setEnthalpy and not temperatureFromInput));
   parameter Boolean xiFromInput = false "= true, if mass fractions input connector is enabled"
     annotation(Dialog(group="Mass fractions"),Evaluate=true, HideResult=true, choices(checkBox=true));
-  parameter Medium.MassFraction Xi0_par[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Mass fractions set value"
+  parameter SI.MassFraction Xi0_par[Medium.nXi] = Medium.X_default[1:Medium.nXi] "Mass fractions set value"
     annotation(Dialog(group="Mass fractions", enable = not xiFromInput));
   parameter Boolean setEnthalpy = false "= true to set specific enthalpy, (= false to set temperature)"
     annotation(Dialog(group="Specific enthalpy"),Evaluate=true, HideResult=true, choices(checkBox=true));
@@ -74,7 +74,7 @@ model BoundaryFore "Generic Boundary model (may act as source or sink)"
     annotation (Placement(transformation(extent={{-80,-20},{-120,20}})));
 
 protected
-  SI.Pressure p_forwards = Medium.pressure(rear.state_forwards);
+  SI.AbsolutePressure p_forwards = Medium.pressure(rear.state_forwards);
 
   Modelica.Blocks.Interfaces.RealInput p0(unit="Pa") "Internal pressure connector";
   Modelica.Blocks.Interfaces.RealInput T0(unit = "K") "Internal temperature connector";

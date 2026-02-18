@@ -19,7 +19,7 @@ model MCV "Flow rate control valve"
     annotation(Dialog(tab="Advanced"));
   parameter Real k2(unit="1") = 100 "Integrator windup factor"
     annotation(Dialog(tab="Advanced"));
-  parameter SI.Pressure p_min_par = dropOfCommons.p_min "Minimal steady-state output pressure"
+  parameter SI.AbsolutePressure p_min_par = dropOfCommons.p_min "Minimal steady-state output pressure"
     annotation(Dialog(tab="Advanced"));
   parameter Boolean enableClippingOutput = false "= true, if clippingOutput is enabled";
 
